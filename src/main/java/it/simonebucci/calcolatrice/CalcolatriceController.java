@@ -46,6 +46,7 @@ public class CalcolatriceController {
     public void perc(){
         if(Objects.equals(symbol, "")) {
             if (!res.getText().equals("ERROR")) {
+                first = String.valueOf(Double.parseDouble(res.getText()) / 100);
                 res.setText(String.valueOf(Double.parseDouble(res.getText()) / 100));
             }
         }

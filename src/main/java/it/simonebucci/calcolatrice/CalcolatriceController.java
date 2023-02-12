@@ -10,6 +10,7 @@ public class CalcolatriceController {
     private String symbol = "";
     private String first = "";
     private String second = "";
+    private static final String ERROR  =  "ERROR";
 
     @FXML
     private Label res;
@@ -44,11 +45,9 @@ public class CalcolatriceController {
     }
 
     public void perc(){
-        if(Objects.equals(symbol, "")) {
-            if (!res.getText().equals("ERROR")) {
+        if(Objects.equals(symbol, "")&&!res.getText().equals(ERROR)) {
                 first = String.valueOf(Double.parseDouble(res.getText()) / 100);
                 res.setText(String.valueOf(Double.parseDouble(res.getText()) / 100));
-            }
         }
     }
 
@@ -79,15 +78,17 @@ public class CalcolatriceController {
                     break;
                 case "/":
                     if (second.equals("0")) {
-                        res.setText("ERROR");
+                        res.setText(ERROR);
                     } else {
                             res.setText(String.valueOf(Double.parseDouble(first) / Double.parseDouble(second)));
                     }
                     break;
+                default:
+                    break;
             }
         }
         symbol = "";
-        if(res.getText().equals("ERROR")){
+        if(res.getText().equals(ERROR)){
             first = "0";
         }else {
             first = res.getText();
@@ -206,7 +207,7 @@ public class CalcolatriceController {
     }
 
     public void changeSign(){
-        if(!res.getText().equals("ERROR")) {
+        if(!res.getText().equals(ERROR)) {
             if (first.indexOf('.') == -1 && second.indexOf('.') == -1) {
                 if (Integer.signum(Integer.parseInt(res.getText())) == 1) {
                     res.setText("-" + res.getText());
